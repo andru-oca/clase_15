@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+} 
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    height:300vh;
+    width:100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h1{
+    
+    background: black;
+    height: 100%;
+    font-size: clamp(12rem, 1vw ,220px);
+    font-family: 'Ubuntu Mono', monospace;
+    text-align: center;
+    font-weight: 400;
+    mix-blend-mode: multiply;
+}
+
+
+/*cuved carrousel*/
+
+#rotate{
+    display: flex;
+    height: 100vh;
+    align-content: center;
+    box-sizing: border-box;
+    margin: 10px;
+    background-color: black;
+}
+
+
+img{
+    width: calc(1/4 * 100vw);
+    height: 100%;
+    object-fit:contain;
+    padding: 1rem;
+}
+
+section {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center  ;
+    --v-offset: 15px;
+    --curve-height: 150px;
+  }
+
+  section:before, section:after {
+    content: "";
+    display: block;
+    background: black;
+    width: calc(100vw + 2 * var(--v-offset));
+    height: var(--curve-height);
+    position: absolute;
+    border-radius: 50%;
+    left: calc(-1 * var(--v-offset)); 
+    right: calc(-1 * var(--v-offset));
+    z-index: 1;
+  }
+  section:before {
+    top: calc(-0.6 * var(--curve-height));
+    
+  }
+  section:after {
+    bottom: calc(-0.6 * var(--curve-height));
+  }
+  
+  .wrapper {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 50px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -ms-scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory;
+  }
+  .wrapper img {
+    scroll-snap-align: center;
+  }
+
+
+
+/*Rotater Slider*/
+#slider{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.slider{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: rotate 40s linear infinite;
+}
+
+
+.slider:hover{
+    animation-play-state: paused ;
+}
+
+.slider span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i)*45deg)) translateZ(300px);
+}
+
+.slider span img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: cover;
+    transition: 1s;
+}
+
+
+@keyframes rotate {
+    0%{transform: perspective(1000px) rotateY(0deg);}
+    100%{transform: perspective(1000px) rotateY(360deg)}
+}
+    
+.slider span:hover img{
+    transform: translateY(-50px) scale(1.2);
+    animation-play-state: paused;
+}
+
